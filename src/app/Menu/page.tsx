@@ -1,8 +1,11 @@
 import React from 'react'
+import Slider from '../components/Slider'
 
 const page = () => {
   return (
-    <div>Menu</div>
+    <div>
+      <Slider title="Menu"/>
+    </div>
   )
 }
 

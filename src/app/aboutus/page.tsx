@@ -1,8 +1,11 @@
 import React from 'react'
+import Slider from '../components/Slider'
 
 const page = () => {
   return (
-    <div>About Us</div>
+    <div>
+      <Slider title="About Us"/>
+    </div>
   )
 }
 
