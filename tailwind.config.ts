@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     fontFamily: {
       'nunito': ['Nunito', 'sans-serif'],
-      'nunito1': ['Nunito Sans', 'sans-serif'] // Ensure fonts with spaces have " " surrounding it.
+      'nunito1': ['Nunito Sans', 'sans-serif'], // Ensure fonts with spaces have " " surrounding it.
+      'Jost': ['Jost', 'sans-serif']
     },
     extend: {
       backgroundImage: {
