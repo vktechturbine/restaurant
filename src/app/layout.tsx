@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import React from "react";
 import { AuthProvider } from "./context/loginContext/LoginContext";
+
+import { CartProvider } from "./context/cartContext/CartContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,11 +25,13 @@ export default function RootLayout({
       <body className={inter.className}>
         <React.StrictMode>
           <AuthProvider>
-            <Navbar />
+            <CartProvider>
+              <Navbar />
 
-            {children}
+              {children}
 
-            <Footer />
+              <Footer />
+            </CartProvider>
           </AuthProvider>
         </React.StrictMode>
       </body>
