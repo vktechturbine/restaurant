@@ -40,9 +40,10 @@ const Navbar = () => {
             About Us
           </Link>
           {user ? (
-            <div>
-              <h1>Welcome, {user.name}!</h1>
-              <button onClick={logout}>Logout</button>
+            <div className="self-center w-[25%] flex font-nunito text-[20px] font-[600] hover:bg-black text-yellow-50 rounded-lg pl-2 pr-2"
+            >
+              <h1 className="w-[85%]">Welcome, {user.name}!</h1>
+              <button className="w-[15%] text-yellow-50" onClick={logout}><img className="text-yellow-50" src="power.svg" width={20} height={20} alt="" /></button>
             </div>
           ) : (
             <Link
