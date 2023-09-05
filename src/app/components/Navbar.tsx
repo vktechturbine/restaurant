@@ -53,6 +53,9 @@ const Navbar = () => {
               Login
             </Link>
           )}
+          {user ? (<Link
+              href="/cartItems"><img className=" hover:bg-black"
+           src="cart.svg" width={40}/></Link>):""}
         </div>
       </div>
     </div>

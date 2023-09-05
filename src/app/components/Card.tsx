@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useAuth } from '../context/loginContext/LoginContext';
+import { useCart } from '../context/cartContext/CartContext';
 
 
 const Card = ({key,name,price,quant}:any) => {
-    const [quantity, setQuantity] = useState(1);
 
+    const {user} = useAuth();
+    const [quantity, setQuantity] = useState(1);
+    const {addToCart} = useCart();
     const handleIncrement = () => {
         setQuantity(quantity + 1);
     };
@@ -15,8 +19,11 @@ const Card = ({key,name,price,quant}:any) => {
         }
     };
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (data:any) => {
         // Implement your logic to add the item to the cart here
+        addToCart(data);
+        console.log("item added successfully");
+
     };
 
     return (
@@ -30,11 +37,11 @@ const Card = ({key,name,price,quant}:any) => {
                 <p  className=" pt-2 pl-2 pb-2 font-nunito text-[20px] font-[600]">${price}</p>
                 <div className="flex pt-2  pb-2">
                     <div className="flex w-[50%] pl-1 justify-between">
-                        <button className="hover:bg-red-600 w-[30%] rounded-md">+</button>
+                        <button className="hover:bg-red-600 w-[30%] rounded-md" onClick={handleIncrement}>+</button>
                         <p>{quantity}</p>
-                        <button className="hover:bg-red-600 w-[30%] rounded-md">-</button>
+                        <button className="hover:bg-red-600 w-[30%] rounded-md" onClick={handleDecrement}>-</button>
                     </div>
-                    <button className="hover:bg-red-600 w-[50%] rounded-lg ">Add to cart</button>
+                    <button className="hover:bg-red-600 w-[50%] rounded-lg " onClick={() => handleAddToCart({name:name,price:price,quantity:quantity})}>Add to cart</button>
                 </div>
            </div>
             
