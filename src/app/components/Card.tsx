@@ -4,9 +4,19 @@ import { useAuth } from '../context/loginContext/LoginContext';
 import { useCart } from '../context/cartContext/CartContext';
 import { useRouter } from 'next/navigation';
 
+interface Cards {
+  key:string,
+  name:string,
+  price:string,
+  quant:string,
+  image:string
+}
 
 
-const Card = ({key,name,price,quant}:any) => {
+const Card = ({key,name,price,quant,image}:Cards) => {
+  console.log(image);
+
+ 
     const navigate = useRouter();
     const {user} = useAuth();
     const [quantity, setQuantity] = useState(1);
@@ -54,7 +64,7 @@ const Card = ({key,name,price,quant}:any) => {
         <div key={key} className="w-[300px]">
 
            <div className="  w-[100%] h-[40%]">
-                <img className="object-cover  w-[100%] rounded-lg " src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80" alt="" />
+                <img className="object-cover  w-[100%] rounded-lg " src={image} alt="" />
            </div>
            <div className="w-[100%] h-[60%]">
                 <h1 className="pt-2 pl-2 pb-2 self-center font-nunito text-[20px] font-[800]">{name}</h1>

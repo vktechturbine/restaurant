@@ -15,7 +15,7 @@ const Page = () => {
     <div>
       <Slider title="Menu" />
       <div className="flex justify-center">
-        <div className="w-[60%] self-center border-[5px] border-[#F16F3E]">
+        <div className="xl:w-[60%] lg:w-[90%] sm:w-[90%] self-center border-[5px] border-[#F16F3E]">
           <div className="w-[40%] flex justify-between pt-4 pb-4">
             <button className="font-Jost text-[1.2em] font-bold uppercase border-2 border-transparent hover:border-t-[#111111] hover:border-b-[#111111] " onClick={() => setMenu("food")} >Food</button>
             <button className="font-Jost text-[1.2em] font-bold uppercase border-2 border-transparent hover:border-t-[#111111] hover:border-b-[#111111] " onClick={() => setMenu("drinks")} >Drinks</button>
