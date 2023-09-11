@@ -2,10 +2,12 @@
 import React, { useContext, useState } from 'react'
 import { useAuth } from '../context/loginContext/LoginContext';
 import { useCart } from '../context/cartContext/CartContext';
+import { useRouter } from 'next/navigation';
+
 
 
 const Card = ({key,name,price,quant}:any) => {
-
+    const navigate = useRouter();
     const {user} = useAuth();
     const [quantity, setQuantity] = useState(1);
     const {addToCart} = useCart();
@@ -14,16 +16,38 @@ const Card = ({key,name,price,quant}:any) => {
     };
 
     const handleDecrement = () => {
+        console.log(user);
         if (quantity > 1) {
             setQuantity(quantity - 1);
         }
     };
 
-    const handleAddToCart = (data:any) => {
+    const handleAddToCart = async (data:any) => {
         // Implement your logic to add the item to the cart here
-        addToCart(data);
-        console.log("item added successfully");
 
+        try {
+            const response = await fetch(
+              `http://localhost:3001/user/cart/addtocart`,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization':`Bearer ${user?.token}`
+                },
+                body: JSON.stringify(data),
+              }
+            );
+            const result = await response.json();
+            addToCart(data);
+            if (result.statusCode === 200) {
+                navigate.push(`/cartItems`);
+            }
+      
+          } catch (error) {
+            console.error(error);
+          }
+       
+        
     };
 
     return (
@@ -41,7 +65,7 @@ const Card = ({key,name,price,quant}:any) => {
                         <p>{quantity}</p>
                         <button className="hover:bg-red-600 w-[30%] rounded-md" onClick={handleDecrement}>-</button>
                     </div>
-                    <button className="hover:bg-red-600 w-[50%] rounded-lg " onClick={() => handleAddToCart({name:name,price:price,quantity:quantity})}>Add to cart</button>
+                    <button className="hover:bg-red-600 w-[50%] rounded-lg " onClick={() => handleAddToCart({email:user?.email,productId:key,name:name,price:price,quantity:quantity})}>Add to cart</button>
                 </div>
            </div>
             

@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useEffect } from 'react'
 import data from '../../../public/MOCK_DATA.json';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -8,8 +8,18 @@ import 'slick-carousel/slick/slick-theme.css';
 
 
 import Card from './Card';
-const SubMenu = ({ name }: any) => {
-    const frsttenProduct = data.slice(0, 9);
+import { error } from 'console';
+const SubMenu = async ({ name }: any) => {
+   await fetch('http://localhost:3001/product/fetchItems').then( response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+}).then(data => {
+    console.log(data.data);
+
+   
+    const frsttenProduct = data.data.slice(0, 9);
     console.log(frsttenProduct);
     var settings = {
 
@@ -72,8 +82,11 @@ const SubMenu = ({ name }: any) => {
                 <button className="w-[2%]" onClick={nextSlide}><img src="greaterthan.svg" className="w-[50px] h-[50px]" alt="" /></button>
             </div>
         </div>
-
+  
     )
+}).catch(error => {
+    console.log(error);
+})
 }
 
 export default SubMenu;

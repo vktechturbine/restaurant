@@ -5,6 +5,7 @@ type User = {
   id: string;
   name: string;
   email: string;
+  token:string;
 };
 
 interface AuthContextType {
@@ -39,6 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const login = (loggedInUser: User) => {
+    console.log(loggedInUser);
     setUser(loggedInUser);
     localStorage.setItem('user', JSON.stringify(loggedInUser));
   };
